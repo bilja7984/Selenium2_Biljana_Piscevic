@@ -5,14 +5,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        
         
         WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
         driver.get("https://www.booking.com/");
         
@@ -28,23 +32,11 @@ public class Main {
         WebElement checkOutBox = driver.findElement(By.xpath("//*[@id=\"frm\"]/div[1]/div[2]/div/div[3]/div/div/div/div[1]"));
         checkOutBox.click();
         
-        WebElement checkOutDate = driver.findElement(By.xpath("//*[@id=\"frm\"]/div[1]/div[2]/div/div[3]/div/div/div/div[2]/div[2]/div[3]/div/div/div[1]/table/tbody/tr[6]/td[2]/span"));
-        checkOutDate.click();
+//        WebElement checkOutDate = driver.findElement(By.xpath("//*[@id=\"frm\"]/div[1]/div[2]/div/div[3]/div/div/div/div[2]/div[2]/div[3]/div/div/div[1]/table/tbody/tr[6]/td[2]/span"));
+//        checkOutDate.click();
 
-//                //Ne znam zasto ne radi??? 
-//        WebElement chalendarField = driver.findElement(By.className("c2-month-table"));
-//        List<WebElement> days = chalendarField.findElements(By.tagName("td"));
-//
-//        int lastDayInMonth = days.lastIndexOf(days);
-//        days.get(lastDayInMonth).click();
-//    
-//          // ili    
-//        for (WebElement day : days) {
-//            if (day.getText().equals("31")) {
-//                day.click();
-//                break;
-//            }
-//        }
+        List<WebElement> checkOutDates = driver.findElements(By.cssSelector("#frm > div.xp__fieldset > div.xp__dates > div > div:nth-child(3) > div > div > div > div.c2-calendar > div.c2-calendar-body > div.c2-calendar-viewport > div > div > div:nth-child(1) > table > tbody > tr:last-child > td.c2-day"));
+        checkOutDates.get(checkOutDates.size() - 1).click();
         
         WebElement personsField = driver.findElement(By.id("xp__guests__toggle"));
         personsField.click();
